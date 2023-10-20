@@ -132,7 +132,7 @@ export function FunctionButton({
                     if (slot1 === null && slot2 === null) {
                         setSlot1(0)
                         setDigits("0.")
-                    } else if (slot1 !== null && slot2 === null) {
+                    } else if (slot1 !== null && operation !== null && slot2 === null) {
                         setSlot2(0)
                         setDigits("0.")
                     } else {
