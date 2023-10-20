@@ -12,6 +12,10 @@ ul {
   list-style: none
 }
 
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   margin: 0;
   display: flex;
