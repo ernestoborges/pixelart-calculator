@@ -16,24 +16,28 @@ export function OperationButton({
     function handleClick() {
 
         if (setOperation && setSlot1 && setSlot2 && setDigits && setIsNegative && setIsFloat && setIsError && !isError) {
-            if (slot1 !== null && slot2 !== null) {
-                let result = calcOperation(slot1, slot2, ctxOperation)
-                if (isNaN(result)) {
-                    setIsError(true)
-                    return
+            if (slot1 !== null) {
+                if (slot2 !== null) {
+
+                    let result = calcOperation(slot1, slot2, ctxOperation)
+                    if (isNaN(result)) {
+                        setIsError(true)
+                        return
+                    }
+                    let negative = result < 0
+
+                    let answer = numberToDisplayString(result)
+
+                    setSlot1(Number(answer.join("")) * (negative ? -1 : 1))
+                    setSlot2(null)
+                    setDigits(answer.join(""))
+                    setOperation(null)
+                    setIsNegative(negative)
                 }
-                let negative = result < 0
 
-                let answer = numberToDisplayString(result)
-
-                setSlot1(Number(answer.join("")) * (negative ? -1 : 1))
-                setSlot2(null)
-                setDigits(answer.join(""))
-                setOperation(null)
-                setIsNegative(negative)
+                setOperation(operation)
+                setIsFloat(false)
             }
-            setIsFloat(false)
-            setOperation(operation)
         }
     }
 

@@ -30,8 +30,8 @@ const DisplayContext = createContext<IDisplayContext>({
 export function DisplayProvider({ children }: { children: React.ReactNode }) {
 
     const [operation, setOperation] = useState<string | null>(null)
-    const [slot1, setSlot1] = useState<number | null>(0)
-    const [slot2, setSlot2] = useState<number | null>(0)
+    const [slot1, setSlot1] = useState<number | null>(null)
+    const [slot2, setSlot2] = useState<number | null>(null)
     const [digits, setDigits] = useState<string>("0")
     const [isNegative, setIsNegative] = useState<boolean>(false)
     const [isFloat, setIsFloat] = useState<boolean>(false)

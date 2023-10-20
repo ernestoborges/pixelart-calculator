@@ -112,6 +112,10 @@ export function FunctionButton({
                     }
 
                     sqrt = Math.sqrt(result)
+                    if (isNaN(sqrt)) {
+                        setIsError(true)
+                        break
+                    }
                     negative = sqrt < 0
                     answer = numberToDisplayString(sqrt)
                     setSlot1(Number(answer.join("")) * (negative ? -1 : 1))
