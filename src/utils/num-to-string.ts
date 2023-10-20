@@ -4,7 +4,6 @@ export function numberToDisplayString(number: number) {
     let noDotAnswer = []
     let string = Math.abs(number).toString().split("")
     let noDotString = string.filter(s => s !== '.')
-    console.log(string, noDotString)
 
     let i = 0
     while (i <= noDotString.length && noDotAnswer.length < 8) {
