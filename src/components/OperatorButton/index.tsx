@@ -50,9 +50,9 @@ const Button = styled.button <IOperation> `
     height: 40px;
     border: none;
     background-color: transparent;
-    background-image: url("../src/assets/btn-${(props) => props.operation}.png");
+    background-image: url("/assets/btn-${(props) => props.operation}.png");
     cursor: pointer;
     &:active {
-        background-image: url("../src/assets/btn-${(props) => props.operation}-click.png");     
+        background-image: url("/assets/btn-${(props) => props.operation}-click.png");     
     }
 `

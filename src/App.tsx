@@ -55,7 +55,7 @@ const Calculator = styled.section`
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  background-image: url(../src/assets/body.png);
+  background-image: url(/assets/body.png);
   
 `
 

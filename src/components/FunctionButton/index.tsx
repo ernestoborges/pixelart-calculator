@@ -153,9 +153,9 @@ const Button = styled.button <IFunction> `
     height: 40px;
     border: none;
     background-color: transparent;
-    background-image: url("../src/assets/btn-${(props) => props.func}.png");
+    background-image: url("/assets/btn-${(props) => props.func}.png");
     cursor: pointer;
     &:active {
-        background-image: url("../src/assets/btn-${(props) => props.func}-click.png");     
+        background-image: url("/assets/btn-${(props) => props.func}-click.png");     
     }
 `

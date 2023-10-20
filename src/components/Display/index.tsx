@@ -39,7 +39,7 @@ export function Display() {
 const Container = styled.section`
     height: 52px;
     width: 192px;
-    background-image: url("../src/assets/display.png");
+    background-image: url("/assets/display.png");
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -57,12 +57,12 @@ const Digits = styled.ul`
 const Digit = styled.li<{ digit: string }>`
     height: 36px;
     width: 16px;
-    background-image: url("../src/assets/num-${props => props.digit}.png")
+    background-image: url("/assets/num-${props => props.digit}.png")
 `
 const Sign = styled.div<{ negative: string }>`
     height: 36px;
     width: 16px;
-    background-image: url("../src/assets/minus-${props => props.negative === "true" ? "show" : "hide"}.png")
+    background-image: url("/assets/minus-${props => props.negative === "true" ? "show" : "hide"}.png")
 `
 
 const Dot = styled.div`
@@ -71,5 +71,5 @@ const Dot = styled.div`
     left: 0;
     height: 36px;
     width: 20px;
-    background-image: url("../src/assets/num-dot.png")
+    background-image: url("/assets/num-dot.png")
 `
