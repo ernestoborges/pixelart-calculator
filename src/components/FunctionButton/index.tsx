@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useDisplayContext } from "../../providers/DisplayProvider"
 import { calcOperation } from "../../utils/calc-operation"
 import { numberToDisplayString } from "../../utils/num-to-string"
+import { useFlashDisplayContext } from "../../providers/FlashDisplayProvider"
 
 interface IFunction {
     func: "c" | "ce" | "sign" | "equal" | "dot" | "sqrt"
@@ -25,25 +26,23 @@ export function FunctionButton({
         isError,
         setIsError
     } = useDisplayContext()
+    const { handleDisplayFlash } = useFlashDisplayContext();
 
     function handleClick() {
-
+        handleDisplayFlash();
         switch (func) {
             case "c": {
-                if (setSlot1 && setSlot2 && setDigits && setOperation && setIsNegative && setIsFloat && setIsError) {
-                    setSlot1(null)
-                    setSlot2(null)
-                    setOperation(null)
-                    setIsNegative(false)
-                    setIsNegative(false)
-                    setIsFloat(false)
-                    setDigits("0")
-                    setIsError(false)
-                }
+                setSlot1(null)
+                setSlot2(null)
+                setOperation(null)
+                setIsNegative(false)
+                setIsFloat(false)
+                setDigits("0")
+                setIsError(false)
                 break;
             }
             case "ce": {
-                if (setDigits && setSlot1 && setSlot2 && setIsFloat && !isError) {
+                if (!isError) {
                     if (slot2 === null) {
                         setSlot1(null)
                     } else {
@@ -56,7 +55,7 @@ export function FunctionButton({
             }
             case "sign": {
 
-                if (setIsNegative && setSlot1 && setSlot2 && !isError) {
+                if (!isError) {
                     setIsNegative(prev => !prev)
 
                     if (slot1 !== null) {
@@ -71,7 +70,7 @@ export function FunctionButton({
                 break;
             }
             case "equal": {
-                if (setDigits && setSlot1 && setSlot2 && setIsNegative && setOperation && setIsFloat && setIsError && !isError) {
+                if (!isError) {
                     if (slot1 !== null && slot2 !== null && operation !== null) {
 
                         let result = calcOperation(slot1, slot2, operation)
@@ -94,7 +93,7 @@ export function FunctionButton({
                 break
             }
             case "sqrt": {
-                if (slot1 !== null && setDigits && setSlot1 && setSlot2 && setIsNegative && setOperation && setIsFloat && setIsError && !isError) {
+                if (slot1 !== null && !isError) {
 
                     let result
                     let sqrt
@@ -128,7 +127,7 @@ export function FunctionButton({
                 break
             }
             case "dot": {
-                if (setDigits && setSlot1 && setSlot2 && setIsFloat && !isFloat && !isError) {
+                if (!isFloat && !isError) {
                     if (slot1 === null && slot2 === null) {
                         setSlot1(0)
                         setDigits("0.")

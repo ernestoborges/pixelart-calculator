@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { useDisplayContext } from "../../providers/DisplayProvider"
+import { useFlashDisplayContext } from "../../providers/FlashDisplayProvider";
 
 export function NumberButton({
     number
@@ -9,8 +10,11 @@ export function NumberButton({
 
     const { digits, operation, slot1, slot2, isFloat, isError, setDigits, setSlot1, setSlot2, setIsNegative } = useDisplayContext()
 
+    const { handleDisplayFlash } = useFlashDisplayContext();
+
     function handleClick() {
-        if (setDigits && setSlot1 && setSlot2 && setIsNegative && !isError) {
+        handleDisplayFlash();
+        if (!isError) {
 
             let value
             if (slot1 === null || slot1 === 0) {

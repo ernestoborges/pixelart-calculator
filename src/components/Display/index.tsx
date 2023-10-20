@@ -1,12 +1,16 @@
 import styled from "styled-components"
 import { useDisplayContext } from "../../providers/DisplayProvider"
+import { useFlashDisplayContext } from "../../providers/FlashDisplayProvider";
 
 export function Display() {
 
     const { digits, isNegative, isError } = useDisplayContext()
-
+    const { isDisplayOff } = useFlashDisplayContext();
     return <>
         <Container>
+            <DisplayWrapper
+                style={{ zIndex: isDisplayOff ? "-1": "1"}}
+            >
             <Sign
                 negative={isNegative.toString()}
             />
@@ -32,7 +36,8 @@ export function Display() {
                         )
                 }
             </Digits>
-        </Container>
+        </DisplayWrapper>
+    </Container >
     </>
 }
 
@@ -40,11 +45,19 @@ const Container = styled.section`
     height: 52px;
     width: 192px;
     background-image: url("/assets/display.png");
+    
+`
+
+const DisplayWrapper = styled.div`
+    height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 12px 0 4px;
+    position: relative;
 `
+
 const DigitContainer = styled.div`
     position: relative
 `

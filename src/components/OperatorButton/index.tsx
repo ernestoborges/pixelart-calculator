@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useDisplayContext } from "../../providers/DisplayProvider"
 import { calcOperation } from "../../utils/calc-operation"
 import { numberToDisplayString } from "../../utils/num-to-string"
+import { useFlashDisplayContext } from "../../providers/FlashDisplayProvider"
 
 interface IOperation {
     operation: "sum" | "dif" | "prod" | "div" | "sqrt"
@@ -12,10 +13,12 @@ export function OperationButton({
 }: IOperation) {
 
     const { slot1, slot2, operation: ctxOperation, isError, setOperation, setSlot1, setSlot2, setDigits, setIsNegative, setIsFloat, setIsError } = useDisplayContext()
+    const { handleDisplayFlash } = useFlashDisplayContext();
 
     function handleClick() {
+        handleDisplayFlash();
 
-        if (setOperation && setSlot1 && setSlot2 && setDigits && setIsNegative && setIsFloat && setIsError && !isError) {
+        if (!isError) {
             if (slot1 !== null) {
                 if (slot2 !== null) {
 
