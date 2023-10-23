@@ -1,8 +1,9 @@
 import styled from "styled-components"
 import { useDisplayContext } from "../../providers/DisplayProvider"
 import { calcOperation } from "../../utils/calc-operation"
-import { numberToDisplayString } from "../../utils/num-to-string"
+import { displayLargeNumber, numberToDisplayString } from "../../utils/num-to-string"
 import { useFlashDisplayContext } from "../../providers/FlashDisplayProvider"
+import { largeNumberCheck } from "../../utils/large-number"
 
 interface IOperation {
     operation: "sum" | "dif" | "prod" | "div" | "sqrt"
@@ -12,23 +13,46 @@ export function OperationButton({
     operation
 }: IOperation) {
 
-    const { slot1, slot2, operation: ctxOperation, isError, setOperation, setSlot1, setSlot2, setDigits, setIsNegative, setIsFloat, setIsError } = useDisplayContext()
+    const {
+        slot1,
+        slot2,
+        operation: ctxOperation,
+        isError,
+        isLargeNumber,
+        setOperation,
+        setSlot1,
+        setSlot2,
+        setDigits,
+        setIsNegative,
+        setIsFloat,
+        setIsError,
+        setIsLargeNumber
+    } = useDisplayContext()
     const { handleDisplayFlash } = useFlashDisplayContext();
 
     function handleClick() {
         handleDisplayFlash();
 
-        if (!isError) {
+        if (!isError && !isLargeNumber) {
             if (slot1 !== null) {
                 if (slot2 !== null) {
 
                     let result = calcOperation(slot1, slot2, ctxOperation)
+
+
                     if (isNaN(result)) {
                         setIsError(true)
                         return
                     }
-                    let negative = result < 0
 
+                    if (largeNumberCheck(result)) {
+                        let answer = displayLargeNumber(result)
+                        setDigits(answer)
+                        setIsLargeNumber(true)
+                        return
+                    }
+
+                    let negative = result < 0
                     let answer = numberToDisplayString(result)
 
                     setSlot1(Number(answer.join("")) * (negative ? -1 : 1))

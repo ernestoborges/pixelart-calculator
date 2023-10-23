@@ -13,6 +13,21 @@ export function numberToDisplayString(number: number) {
         }
         i++
     }
-    
+
     return answer
+}
+
+export function displayLargeNumber(number: number) {
+
+
+    let exp = number.toExponential().split("+").join("")
+
+    let string = exp
+    if (exp.length > 9) {
+        let [valueL, valueR] = exp.split("e")
+        let valueSlice = valueL.slice(0, 8 - valueR.length)
+        string = valueSlice + "e" + valueR
+    }
+
+    return string
 }

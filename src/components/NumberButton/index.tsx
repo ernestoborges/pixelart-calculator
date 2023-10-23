@@ -8,13 +8,13 @@ export function NumberButton({
     number: string
 }) {
 
-    const { digits, operation, slot1, slot2, isFloat, isError, setDigits, setSlot1, setSlot2, setIsNegative } = useDisplayContext()
+    const { digits, operation, slot1, slot2, isFloat, isError, isLargeNumber, setDigits, setSlot1, setSlot2, setIsNegative } = useDisplayContext()
 
     const { handleDisplayFlash } = useFlashDisplayContext();
 
     function handleClick() {
         handleDisplayFlash();
-        if (!isError) {
+        if (!isError && !isLargeNumber) {
 
             let value
             if (slot1 === null || slot1 === 0) {

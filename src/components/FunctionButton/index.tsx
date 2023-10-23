@@ -1,8 +1,9 @@
 import styled from "styled-components"
 import { useDisplayContext } from "../../providers/DisplayProvider"
 import { calcOperation } from "../../utils/calc-operation"
-import { numberToDisplayString } from "../../utils/num-to-string"
+import { displayLargeNumber, numberToDisplayString } from "../../utils/num-to-string"
 import { useFlashDisplayContext } from "../../providers/FlashDisplayProvider"
+import { largeNumberCheck } from "../../utils/large-number"
 
 interface IFunction {
     func: "c" | "ce" | "sign" | "equal" | "dot" | "sqrt"
@@ -24,7 +25,9 @@ export function FunctionButton({
         isFloat,
         setIsFloat,
         isError,
-        setIsError
+        setIsError,
+        isLargeNumber,
+        setIsLargeNumber
     } = useDisplayContext()
     const { handleDisplayFlash } = useFlashDisplayContext();
 
@@ -39,10 +42,11 @@ export function FunctionButton({
                 setIsFloat(false)
                 setDigits("0")
                 setIsError(false)
+                setIsLargeNumber(false)
                 break;
             }
             case "ce": {
-                if (!isError) {
+                if (!isError && !isLargeNumber) {
                     if (slot2 === null) {
                         setSlot1(null)
                     } else {
@@ -55,7 +59,7 @@ export function FunctionButton({
             }
             case "sign": {
 
-                if (!isError) {
+                if (!isError && !isLargeNumber) {
                     setIsNegative(prev => !prev)
 
                     if (slot1 !== null) {
@@ -70,7 +74,7 @@ export function FunctionButton({
                 break;
             }
             case "equal": {
-                if (!isError) {
+                if (!isError && !isLargeNumber) {
                     if (slot1 !== null && slot2 !== null && operation !== null) {
 
                         let result = calcOperation(slot1, slot2, operation)
@@ -78,8 +82,15 @@ export function FunctionButton({
                             setIsError(true)
                             break
                         }
-                        let negative = result < 0
 
+                        if (largeNumberCheck(result)) {
+                            let answer = displayLargeNumber(result)
+                            setDigits(answer)
+                            setIsLargeNumber(true)
+                            return
+                        }
+
+                        let negative = result < 0
                         let answer = numberToDisplayString(result)
 
                         setSlot1(Number(answer.join("")) * (negative ? -1 : 1))
@@ -93,7 +104,7 @@ export function FunctionButton({
                 break
             }
             case "sqrt": {
-                if (slot1 !== null && !isError) {
+                if (slot1 !== null && !isError && !isLargeNumber) {
 
                     let result
                     let sqrt
@@ -115,6 +126,12 @@ export function FunctionButton({
                         setIsError(true)
                         break
                     }
+                    if (largeNumberCheck(result)) {
+                        let answer = displayLargeNumber(result)
+                        setDigits(answer)
+                        setIsLargeNumber(true)
+                        return
+                    }
                     negative = sqrt < 0
                     answer = numberToDisplayString(sqrt)
                     setSlot1(Number(answer.join("")) * (negative ? -1 : 1))
@@ -127,7 +144,7 @@ export function FunctionButton({
                 break
             }
             case "dot": {
-                if (!isFloat && !isError) {
+                if (!isFloat && !isError && !isLargeNumber) {
                     if (slot1 === null && slot2 === null) {
                         setSlot1(0)
                         setDigits("0.")

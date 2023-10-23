@@ -18,7 +18,7 @@ export function Display() {
                 {
                     isError
                         ? <>
-                            <Digit digit="E" />
+                            <Digit digit="e" />
                             <Digit digit="R" />
                             <Digit digit="R" />
                             <Digit digit="0" />
