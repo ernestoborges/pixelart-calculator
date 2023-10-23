@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
 :root {
   background-color: #453153;
+  font-family: 'Silkscreen', sans-serif;
+  color: white;
 }
 
 * {
@@ -20,7 +24,6 @@ body {
   margin: 0;
   display: flex;
   min-width: 248px;
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +32,9 @@ body {
 #root {
   max-width: 1280px;
   width: 100%;
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }

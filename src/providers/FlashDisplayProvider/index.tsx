@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { useAudioContext } from "../AudioProvider";
 
 interface IFlashDisplayContext {
     isDisplayOff: boolean,
@@ -20,6 +21,7 @@ export function FlashDisplayProvider({ children }: { children: React.ReactNode }
 
     const [isDisplayOff, setIsDisplayOff] = useState<boolean>(false);
     const [timeoutId, setTimeoutId] = useState<number | null>(null);
+    const { playBipSound } = useAudioContext()
 
     function handleDisplayFlash() {
         if (timeoutId) {
@@ -27,6 +29,7 @@ export function FlashDisplayProvider({ children }: { children: React.ReactNode }
         }
 
         setIsDisplayOff(true);
+        playBipSound()
 
         const newTimeoutId = setTimeout(() => {
             setIsDisplayOff(false);

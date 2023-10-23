@@ -8,6 +8,7 @@ interface IDisplayContext {
     isNegative: boolean
     isFloat: boolean
     isError: boolean
+    isLargeNumber: boolean
     setSlot1: React.Dispatch<React.SetStateAction<number | null>>;
     setSlot2: React.Dispatch<React.SetStateAction<number | null>>;
     setDigits: React.Dispatch<React.SetStateAction<string>>;
@@ -15,6 +16,7 @@ interface IDisplayContext {
     setIsNegative: React.Dispatch<React.SetStateAction<boolean>>;
     setIsFloat: React.Dispatch<React.SetStateAction<boolean>>;
     setIsError: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsLargeNumber: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DisplayContext = createContext<IDisplayContext>({
@@ -25,13 +27,15 @@ const DisplayContext = createContext<IDisplayContext>({
     isNegative: false,
     isFloat: false,
     isError: false,
+    isLargeNumber: false,
     setSlot1: () => null,
     setSlot2: () => null,
     setDigits: () => "0",
     setOperation: () => null,
     setIsNegative: () => false,
     setIsFloat: () => false,
-    setIsError: () => false
+    setIsError: () => false,
+    setIsLargeNumber: () => false
 });
 
 export function DisplayProvider({ children }: { children: React.ReactNode }) {
@@ -43,6 +47,7 @@ export function DisplayProvider({ children }: { children: React.ReactNode }) {
     const [isNegative, setIsNegative] = useState<boolean>(false)
     const [isFloat, setIsFloat] = useState<boolean>(false)
     const [isError, setIsError] = useState<boolean>(false)
+    const [isLargeNumber, setIsLargeNumber] = useState<boolean>(false)
 
 
 
@@ -62,7 +67,9 @@ export function DisplayProvider({ children }: { children: React.ReactNode }) {
                 isFloat,
                 setIsFloat,
                 isError,
-                setIsError
+                setIsError,
+                isLargeNumber,
+                setIsLargeNumber
             }}>
             {children}
         </DisplayContext.Provider>
