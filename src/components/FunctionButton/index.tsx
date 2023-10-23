@@ -78,7 +78,7 @@ export function FunctionButton({
                     if (slot1 !== null && slot2 !== null && operation !== null) {
 
                         let result = calcOperation(slot1, slot2, operation)
-                        if (isNaN(result)) {
+                        if (isNaN(result) || !isFinite(result)) {
                             setIsError(true)
                             break
                         }
@@ -113,7 +113,7 @@ export function FunctionButton({
 
                     if (slot2 !== null) {
                         result = calcOperation(slot1, slot2, operation)
-                        if (isNaN(result)) {
+                        if (isNaN(result) || !isFinite(result)) {
                             setIsError(true)
                             break
                         }
@@ -122,7 +122,7 @@ export function FunctionButton({
                     }
 
                     sqrt = Math.sqrt(result)
-                    if (isNaN(sqrt)) {
+                    if (isNaN(sqrt) || !isFinite(sqrt)) {
                         setIsError(true)
                         break
                     }

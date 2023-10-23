@@ -40,7 +40,7 @@ export function OperationButton({
                     let result = calcOperation(slot1, slot2, ctxOperation)
 
 
-                    if (isNaN(result)) {
+                    if (isNaN(result) || !isFinite(result)) {
                         setIsError(true)
                         return
                     }
