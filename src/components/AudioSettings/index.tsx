@@ -9,10 +9,16 @@ export function AudioSettings() {
     return <>
 
         <Container>
-            <Button
-                onClick={() => audioToggle()}
-                isEnabled={audioEnabled}
-            />
+            {
+                audioEnabled
+                    ? <ButtonUnMuted
+                        onClick={() => audioToggle()}
+                    />
+                    : <ButtonMuted
+                        onClick={() => audioToggle()}
+                    />
+            }
+
             <div>
                 <div>
                     {audioVolume.padStart(3)}
@@ -55,14 +61,23 @@ const Container = styled.div`
 
 `
 
-const Button = styled.button<{ isEnabled: boolean }>`
+const Button = styled.button`
     width: 48px;
     height: 39px;
-    background-image: url("/assets/audio-ico${props => props.isEnabled ? "" : "-off"}.png");
     border:0;
     background-color: transparent;
+    background-image: url("/assets/audio-ico.png");
     cursor:pointer;
+`
+const ButtonMuted = styled(Button)`
+    background-position: -96px 0; 
+    &:active{
+        background-position: -144px 0; 
+    }
+`
 
+const ButtonUnMuted = styled(Button)`
+    background-position: 0 0; 
     &:active{
         background-position: -48px 0; 
     }
