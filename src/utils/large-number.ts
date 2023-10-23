@@ -25,7 +25,7 @@ export function largeNumberCheck(number: number) {
             size++
         }
 
-        if(size >= 8){
+        if(size > 8){
             isLarge = true
         }
 

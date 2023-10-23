@@ -38,6 +38,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 
     function playBipSound() {
         if(beepSound && audioEnabled){
+            beepSound.volume = parseInt(audioVolume) / 100
             beepSound.play()
         }
     }

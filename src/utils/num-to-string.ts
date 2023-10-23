@@ -20,7 +20,7 @@ export function numberToDisplayString(number: number) {
 export function displayLargeNumber(number: number) {
 
 
-    let exp = number.toExponential().split("+").join("")
+    let exp = Math.abs(number).toExponential().split("+").join("")
 
     let string = exp
     if (exp.length > 9) {
