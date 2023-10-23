@@ -176,6 +176,6 @@ const Button = styled.button <IFunction> `
     background-image: url("/assets/btn-${(props) => props.func}.png");
     cursor: pointer;
     &:active {
-        background-image: url("/assets/btn-${(props) => props.func}-click.png");     
+        background-position: -44px 0;
     }
 `

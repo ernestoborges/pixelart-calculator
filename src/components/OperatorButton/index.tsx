@@ -84,6 +84,6 @@ const Button = styled.button <IOperation> `
     background-image: url("/assets/btn-${(props) => props.operation}.png");
     cursor: pointer;
     &:active {
-        background-image: url("/assets/btn-${(props) => props.operation}-click.png");     
+        background-position: -44px 0;
     }
 `

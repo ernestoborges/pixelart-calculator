@@ -64,7 +64,7 @@ const Button = styled.button<{ isEnabled: boolean }>`
     cursor:pointer;
 
     &:active{
-        background-image: url("/assets/audio-ico${props => props.isEnabled ? "" : "-off"}-click.png");    
+        background-position: -48px 0; 
     }
 `
 

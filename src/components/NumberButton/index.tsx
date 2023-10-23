@@ -56,7 +56,8 @@ const Button = styled.button<{ number: string }>`
     background-color: transparent;
     background-image: url("/assets/btn-${(props) => props.number}.png");
     cursor: pointer;
+
     &:active {
-        background-image: url("/assets/btn-${(props) => props.number}-click.png");     
+        background-position: -44px 0;
     }
 `
