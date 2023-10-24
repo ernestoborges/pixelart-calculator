@@ -4,20 +4,16 @@ import { useAudioContext } from "../../providers/AudioProvider"
 export function AudioSettings() {
 
 
-    const { audioEnabled, audioVolume, audioToggle, handleAudioVolume } = useAudioContext()
+    const { audioEnabled, audioVolume, audioToggle, handleAudioVolume, playBipSound } = useAudioContext()
 
     return <>
 
         <Container>
-            {
-                audioEnabled
-                    ? <ButtonUnMuted
-                        onMouseDown={() => audioToggle()}
-                    />
-                    : <ButtonMuted
-                        onMouseDown={() => audioToggle()}
-                    />
-            }
+            <Button
+                onMouseDown={() => playBipSound()}
+                onMouseUp={() => audioToggle()}
+                audioEnabled={audioEnabled}
+            />
 
             <div>
                 <div>
@@ -61,25 +57,16 @@ const Container = styled.div`
 
 `
 
-const Button = styled.button`
+const Button = styled.button <{ audioEnabled: boolean }>`
     width: 48px;
     height: 39px;
     border:0;
     background-color: transparent;
     background-image: url("/assets/audio-ico.png");
     cursor:pointer;
-`
-const ButtonMuted = styled(Button)`
-    background-position: -96px 0; 
+    background-position: ${props => props.audioEnabled ? "0" : "-96px"} 0; 
     &:active{
-        background-position: -144px 0; 
-    }
-`
-
-const ButtonUnMuted = styled(Button)`
-    background-position: 0 0; 
-    &:active{
-        background-position: -48px 0; 
+        background-position: ${props => props.audioEnabled ? "-48px" : "-144px"} 0; 
     }
 `
 

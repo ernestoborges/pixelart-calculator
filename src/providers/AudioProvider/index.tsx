@@ -25,9 +25,6 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 
     function audioToggle() {
         setAudioEnabled(prev => !prev)
-        if(beepSound && !audioEnabled){
-            beepSound.play()
-        }
     }
 
     function handleAudioVolume(volume: string) {
