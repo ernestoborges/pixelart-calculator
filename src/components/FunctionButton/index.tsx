@@ -163,7 +163,7 @@ export function FunctionButton({
     return <>
         <Button
             func={func}
-            onClick={() => handleClick()}
+            onMouseDown={() => handleClick()}
         />
     </>
 }

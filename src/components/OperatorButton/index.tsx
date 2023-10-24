@@ -71,7 +71,7 @@ export function OperationButton({
     return <>
         <Button
             operation={operation}
-            onClick={() => handleClick()}
+            onMouseDown={() => handleClick()}
         />
     </>
 }

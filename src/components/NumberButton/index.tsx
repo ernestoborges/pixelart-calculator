@@ -44,7 +44,7 @@ export function NumberButton({
     return <>
         <Button
             number={number}
-            onClick={() => handleClick()}
+            onMouseDown={() => handleClick()}
         />
     </>
 }

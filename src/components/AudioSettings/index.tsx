@@ -12,10 +12,10 @@ export function AudioSettings() {
             {
                 audioEnabled
                     ? <ButtonUnMuted
-                        onClick={() => audioToggle()}
+                        onMouseDown={() => audioToggle()}
                     />
                     : <ButtonMuted
-                        onClick={() => audioToggle()}
+                        onMouseDown={() => audioToggle()}
                     />
             }
 
